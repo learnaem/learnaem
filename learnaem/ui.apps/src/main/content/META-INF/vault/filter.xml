@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/learnaem/clientlibs"/>
+    <filter root="/apps/learnaem/components"/>
+    <filter root="/apps/learnaem/i18n"/>
+</workspaceFilter>
