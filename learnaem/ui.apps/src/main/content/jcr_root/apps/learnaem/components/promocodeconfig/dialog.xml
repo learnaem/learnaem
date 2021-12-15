@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Dialog"
+    height="400"
+    title="Resort Promo Code Details"
+    xtype="dialog">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <tabs jcr:primaryType="cq:TabPanel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <promocodedetails
+                    jcr:primaryType="nt:unstructured"
+                    name="promoCodeConfig"
+                    title="Promo Code Details"
+                    xtype="panel">
+                    <items jcr:primaryType="cq:WidgetCollection">
+                        <resortId
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="false"
+                            fieldDescription="Please select Resort from the dropdown"
+                            fieldLabel="Resort Id"
+                            name="./resortId"
+                            options="/content/racv/lists/resort/resorts-list/_jcr_content.list.json"
+                            type="select"
+                            xtype="selection"/>
+                        <promotionCode
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="false"
+                            fieldDescription="Please enter the promotion code"
+                            fieldLabel="Promotion Code"
+                            name="./promotionCode"
+                            xtype="textfield"/>
+                        <type
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="false"
+                            defaultValue="Please select Type of Promo Code"
+                            fieldLabel="Type"
+                            name="./type"
+                            type="select"
+                            xtype="selection">
+                            <options jcr:primaryType="cq:WidgetCollection">
+                                <corporate
+                                    jcr:primaryType="nt:unstructured"
+                                    text="CORPORATE"
+                                    value="12"/>
+                            </options>
+                        </type>
+                        <memberType
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="false"
+                            defaultValue="Please select Member Type"
+                            fieldLabel="Member Type"
+                            name="./memberType"
+                            type="select"
+                            xtype="selection">
+                            <options jcr:primaryType="cq:WidgetCollection">
+                                <member
+                                    jcr:primaryType="nt:unstructured"
+                                    text="MEMBER"
+                                    value="member"/>
+                                <nonMember
+                                    jcr:primaryType="nt:unstructured"
+                                    text="NON MEMBER"
+                                    value="non-member"/>
+                            </options>
+                        </memberType>
+                        <memberRatePlanId
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="true"
+                            fieldDescription="Please enter member rate plan id for promo code"
+                            fieldLabel="Member Rate Plan Id"
+                            name="./memberRatePlanId"
+                            xtype="textfield"/>
+                        <nonMemberRatePlanId
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="true"
+                            fieldDescription="Please enter non-member rate plan id for promo code"
+                            fieldLabel="Non-Member Rate Plan Id"
+                            name="./nonMemberRatePlanId"
+                            xtype="textfield"/>
+                        <startDate
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="false"
+                            fieldDescription="Please enter Promotion Start Date"
+                            fieldLabel="Promotion Start Date"
+                            name="./startDate"
+                            xtype="datefield"/>
+                        <endDate
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="false"
+                            fieldDescription="Please enter Promotion End Date"
+                            fieldLabel="Promotion End Date"
+                            name="./endDate"
+                            xtype="datefield"/>
+                    </items>
+                </promocodedetails>
+            </items>
+        </tabs>
+    </items>
+</jcr:root>

@@ -1,0 +1,11 @@
+<sly data-sly-test="${wcmmode.edit}" data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.all @ categories='cq.authoring.dialog'}">
+</sly>
+<li>
+<b>Promotion Code</b>&nbsp;${properties.promotionCode}<br/>
+<b>Resort Id:</b>&nbsp;${properties.resortId}<br/>
+<b>Member Rate Plans:</b>&nbsp;${properties.memberRatePlanId}<br/>
+<b>Non Member Rate Plans:</b>&nbsp;${properties.nonMemberRatePlanId}<br/>
+<b>Date:</b>&nbsp;${properties.startDate} - ${properties.endDate}
+<hr>
+</li>
