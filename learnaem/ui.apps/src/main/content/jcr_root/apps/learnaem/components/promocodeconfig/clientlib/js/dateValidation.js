@@ -13,16 +13,16 @@
 		};
 
 		$inputs.each(function(index, input) {
-
+		var today = new Date();
+            alert(today);
 			$input = $(input);
-			tile = $input.val();
             var startDateV = "./startDate";
             var endDateV = "./endDate";
          var startdate= $("input[name='"+startDateV+"']").val();
         var endDate= $("input[name='"+endDateV+"']").val();
             console.log(patterns.datePattern.test(startdate));
             console.log(patterns.datePattern.test(endDate));
-			if (!patterns.datePattern.test(startdate) || !patterns.datePattern.test(endDate)) {
+			if (!patterns.datePattern.test(startdate)) {
 				 e.preventDefault();
 				isError = true;
 				$input.css("border", "2px solid #FF0000");
