@@ -1,1 +1,11 @@
 This is a base page component  training for a static template
+This is a base page component  training for a static template
+
+
+<sly data-sly-include="/libs/wcm/core/components/init/init.jsp" data-sly-unwrap/>
+
+<div data-sly-resource="${'ipar' @ resourceType='wcm/foundation/components/iparsys'}"/>
+<div data-sly-resource="${'parcontent' @ resourceType='wcm/foundation/components/parsys'}"/>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientLib.all @ categories='learnaem.base'}" /> 
+
