@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Content-Package-Id: my_packages:templates
+Content-Package-Type: mixed
+
