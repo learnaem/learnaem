@@ -2,17 +2,18 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>FileVault Package Properties</comment>
-<entry key="packageType">mixed</entry>
+<entry key="description"></entry>
+<entry key="packageType">application</entry>
 <entry key="lastWrappedBy">admin</entry>
 <entry key="packageFormatVersion">2</entry>
 <entry key="group">my_packages</entry>
-<entry key="created">2021-12-20T19:22:29.012+05:30</entry>
+<entry key="created">2021-12-20T20:09:04.221+05:30</entry>
 <entry key="lastModifiedBy">admin</entry>
 <entry key="buildCount">1</entry>
-<entry key="lastWrapped">2021-12-20T19:22:28.934+05:30</entry>
+<entry key="lastWrapped">2021-12-20T20:09:04.184+05:30</entry>
 <entry key="version"></entry>
 <entry key="dependencies"></entry>
 <entry key="createdBy">admin</entry>
-<entry key="name">simplecollapsable</entry>
-<entry key="lastModified">2021-12-20T19:22:28.934+05:30</entry>
+<entry key="name">simplecollapsable-p</entry>
+<entry key="lastModified">2021-12-20T20:09:04.184+05:30</entry>
 </properties>

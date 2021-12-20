@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Content-Package-Id: my_packages:simplecollapsable
-Content-Package-Type: mixed
-

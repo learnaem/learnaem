@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Content-Package-Id: my_packages:simplecollapsable-p
+Content-Package-Roots: /apps/learnaem/components/simplecollapsable
+Content-Package-Type: application
+
