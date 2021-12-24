@@ -55,6 +55,11 @@
                                 cq:policy="learnaem/components/download/policy_1575032193319"
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="wcm/core/components/policies/mapping"/>
+                             <simple-collapsable
+                            cq:policy="learnaem/components/simple-collapsable/policy_1640141887358"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="wcm/core/components/policies/mapping"/>  
+                                
                         </components>
                     </learnaem>
                 </container>
