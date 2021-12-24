@@ -1,0 +1,32 @@
+<sly data-sly-include="/libs/wcm/core/components/init/init.jsp" data-sly-unwrap/>
+
+<sly data-sly-test.someValue="Bhaskar"></sly>
+
+<sly data-sly-test="${someValue}">
+${properties.sitePages}
+<img src="${properties.fileReference}">
+
+<div class="container">
+  <h2>${properties.tittle}</h2>
+  <p>${properties.parag}</p>
+                                        
+  <div class="spinner-border text-muted"></div>
+  <div class="spinner-border text-primary"></div>
+  <div class="spinner-border text-success"></div>
+  <div class="spinner-border text-info"></div>
+  <div class="spinner-border text-warning"></div>
+  <div class="spinner-border text-danger"></div>
+  <div class="spinner-border text-secondary"></div>
+  <div class="spinner-border text-dark"></div>
+  <div class="spinner-border text-light"></div>
+</div>
+</sly>
+
+<br>
+<sly data-sly-test="${wcmmode.edit}">Edit Mode<br> 
+<div data-sly-resource="${'parcontent' @ resourceType='wcm/foundation/components/parsys'}"/>
+
+</sly>
+<sly data-sly-test="${wcmmode.preview}">Preview Mode<br></sly>
+<sly data-sly-test="${wcmmode.disabled}">Disabled Mode<br></sly>
+
