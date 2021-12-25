@@ -1,0 +1,28 @@
+<sly data-sly-include="/libs/wcm/core/components/init/init.jsp" data-sly-unwrap/>
+
+
+<sly data-sly-test.someValue="properties.jcr:title"</sly>
+${properties.sitePages}
+
+<div class="${someValue? 'container':'nocontainer'}container">
+
+
+
+
+  <h2>${properties.jcr:title}</h2>
+  <p>${properties.para}</p>
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">click me</button>
+  <div id="demo" class="collapse">
+  <h3>${properties.lorem}</h3>
+ <img src=" ${properties.fileReference}">
+
+  </div>
+</div>
+
+</sly>
+<sly data-sly-test="${wcmmode.edit}"> EDit Mode<br>
+<sly data-sly-resource="${'ipar' @ resourceType='wcm/foundation/components/iparsys'}"/>
+</sly>
+<sly data-sly-test="${wcmmode.preview}"> preview Mode<br></sly>
+<sly data-sly-test="${wcmmode.disabled}"> disabled Mode<br></sly>
+
