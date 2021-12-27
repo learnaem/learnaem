@@ -1,12 +1,27 @@
+<sly data-sly-include="/libs/wcm/core/components/init/init.jsp" data-sly-unwrap/>
+<sly data-sly-test.someValue="${properties.jcr:title}"></sly>
 
-<div class="container">
-  <h2>Simple Collapsible</h2>
-  <p>Click on the button to toggle between showing and hiding content.</p>
-  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
+
+Hellllloooo ${someValue}
+${properties.sitePages}
+    <div data-sly-test="${properties.jcr:title? 'container' : 'nocontainer'}">
+
+  <h2>${properties.jcr:title}</h2>
+
+  <p>${properties.para}</p>
+
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">${properties.jcr:title}</button>
   <div id="demo" class="collapse">
-    Lor em ipsum dolor sit amet, consectetur adipisicing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    ${properties.lorem}${someValue}
   </div>
+  <sly data-sly-test="${properties.fileReference}">
+  <img src="${properties.fileReference}">
+  </sly>
 </div>
+</sly>
+
+<sly data-sly-test="${wcmmode.edit}">EDIT MODE<br>
+<sly data-sly-resource="${'parcontent' @ resourceType='wcm/foundation/components/parsys'}"/></sly>
+<sly data-sly-test="${wcmmode.preview}">PREVIEW MODE</sly>
+<sly data-sly-test="${wcmmode.disabled}">DISABLED MODE</sly>
 
