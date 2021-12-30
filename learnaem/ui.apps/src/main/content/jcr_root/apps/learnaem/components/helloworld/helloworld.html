@@ -6,23 +6,36 @@
     You may obtain a copy of the License at
   
         http://www.apache.org/licenses/LICENSE-2.0
-  
+
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
 */-->
-<div class="cmp-helloworld" data-cmp-is="helloworld">
-    <h2 class="cmp-helloworld__title">Hello World Component</h2>
-    <div class="cmp-helloworld__item" data-sly-test="${properties.text}">
-        <p class="cmp-helloworld__item-label">Text property:</p>
-        <pre class="cmp-helloworld__item-output" data-cmp-hook-helloworld="property">${properties.text}</pre>
-    </div>
-    <div class="cmp-helloworld__item" data-sly-use.model="com.learnaem.core.models.HelloWorldModel" data-sly-test="${model.message}">
+ <div class="cmp-helloworld__item" data-sly-use.model="com.learnaem.core.models.HelloWorldModel" data-sly-test="${model.message}">
         <p class="cmp-helloworld__item-label">Model message:</p>
         <pre class="cmp-helloworld__item-output"data-cmp-hook-helloworld="model">${model.message}</pre>
-    </div>
-    
-    Hi This is New Commit
-</div>
+</div> 
+
+<sly data-sly-use.o="cookie.js"></sly>
+
+Cokieee${o.cookieset}
+
+Helooo<p data-sly-text="${model.message1}">Lorem ipsum</p>
+Heloo22<p>${model.message1}</p>
+
+<div data-sly-attribute.title="${model.message}">Helooo</div>
+
+<div data-sly-include="/apps/learnaem/components/helloworld/heloooo/one.jsp" />
+
+<b>1</b>
+<section data-sly-include="${ @ file='/apps/learnaem/components/helloworld/hi.html'}"></section>
+<br>
+<b>2</b>
+<section data-sly-include="${'hi.html' @ prependPath='/apps/learnaem/components/helloworld'}"></section>
+<br>
+<b>3</b>
+<section data-sly-include="${'/apps/learnaem/components/helloworld' @ appendPath='hi.html'}"></section>
+
+

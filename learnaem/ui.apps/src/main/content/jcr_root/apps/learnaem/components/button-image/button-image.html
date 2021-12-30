@@ -1,0 +1,8 @@
+Image Component
+
+ <sly data-sly-use.button="/apps/learnaem/components/cta-template/cta.html"/>
+
+ <sly  data-sly-resource="${'image' @ resourceType='/apps/learnaem/components/image', decorationTagName='div', cssClassName='image-block-container'}"/>
+    Button Component
+
+    <sly data-sly-call="${button.ctaButton @ text='Heloo This Button', url='https://www.google.com'}">
