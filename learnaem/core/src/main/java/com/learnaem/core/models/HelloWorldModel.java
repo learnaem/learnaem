@@ -49,6 +49,8 @@ public class HelloWorldModel {
     private ResourceResolver resourceResolver;
 
     private String message;
+    
+    private String[] techUsedinAEM;
 
     @PostConstruct
     protected void init() {
@@ -61,10 +63,16 @@ public class HelloWorldModel {
             + "Resource type is: " + resourceType + "\n"
             + "Current page is:  " + currentPagePath + "\n"
             + "This is instance: " + settings.getSlingId() + "\n";
+        techUsedinAEM= new String[]{"java","sightly","sling","OSGI","JCR","JettyServer"};
     }
 
     public String getMessage() {
         return message;
     }
+
+	public String[] getTechUsedinAEM() {
+		return techUsedinAEM;
+	}
+    
 
 }
