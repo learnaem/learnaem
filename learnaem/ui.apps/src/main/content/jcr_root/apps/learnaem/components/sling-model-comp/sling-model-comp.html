@@ -1,0 +1,16 @@
+<sly data-sly-use.newmodel="com.learnaem.core.models.MySlingModel">
+Hi This is Sling Model
+
+
+
+<h1>Front End</h1>
+${properties.jcr:title}<br>
+${properties.fname}<br>
+${properties.lname}<br>
+${ 'dd-MMM-yyyy hh:mm:ss' @ format=properties.dob}<br>
+
+<h1>Back End End</h1>
+${newmodel.title}<br>
+${newmodel.fname}<br>
+${newmodel.lname}<br>
+${newmodel.dob}<br>
