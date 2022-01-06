@@ -3,22 +3,19 @@ package com.learnaem.core.models;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.RequestAttribute;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
-@Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class SlingModel {
+@Model(adaptables = SlingHttpServletRequest.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+public class BeSlingModel {
 
-	@ValueMapValue
-	private String dob;
+	@ValueMapValue(name = "jcr:title")
+	private String title;
 
 	@ValueMapValue
 	private String fname;
@@ -26,8 +23,8 @@ public class SlingModel {
 	@ValueMapValue
 	private String lname;
 
-	@ValueMapValue(name = "jcr:title")
-	private String title;
+	@ValueMapValue
+	private String dob;
 
 	private long age;
 
@@ -44,6 +41,10 @@ public class SlingModel {
 
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
 	public String getFname() {
 		return fname;
 	}
@@ -52,12 +53,11 @@ public class SlingModel {
 		return lname;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getDob() {
+		return dob;
 	}
 
 	public long getAge() {
 		return age;
 	}
-
 }
