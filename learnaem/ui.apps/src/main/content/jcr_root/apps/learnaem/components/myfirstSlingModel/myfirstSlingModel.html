@@ -1,0 +1,22 @@
+Value from FE<br>
+${properties.jcr:title} ${properties.fname}
+${properties.lname}<br>
+
+${properties.fileReference}
+
+${'yyyy-MM-dd' @ format=properties.dob}
+
+
+<br>
+Values from BE from SlingModel<br>
+
+<sly data-sly-use.firstModel="${'com.learnaem.core.models.MyFirstSlingModel' @param1=properties.fileReference,one="Heloo",two="two"}">
+
+Inside Sly
+${firstModel.title}<br>
+${firstModel.fname}<br>
+${firstModel.lname}<br>
+${firstModel.age}<br>
+${firstModel.fullName}
+
+</sly>
