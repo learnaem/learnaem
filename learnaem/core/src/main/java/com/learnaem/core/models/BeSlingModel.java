@@ -9,11 +9,20 @@ import javax.annotation.PostConstruct;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.RequestAttribute;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 @Model(adaptables = SlingHttpServletRequest.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class BeSlingModel {
 
+	
+    @RequestAttribute
+	private String param1;
+    @RequestAttribute
+    private String one;
+    @RequestAttribute
+    private String two;
+	
 	@ValueMapValue(name = "jcr:title")
 	private String title;
 
@@ -45,6 +54,19 @@ public class BeSlingModel {
 		return title;
 	}
 
+	public String getParam1() {
+		return param1;
+	}
+
+
+	public String getOne() {
+		return one;
+	}
+
+
+	public String getTwo() {
+		return two;
+	}
 	public String getFname() {
 		return fname;
 	}
