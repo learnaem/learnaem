@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Resort Promo Code Details"
+    sling:resourceType="cq/gui/components/authoring/dialog"
+    extraClientLibs="[promo-validations]">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/container">
+        <layout
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/tabs"
+            type="nav"/>
+        <items jcr:primaryType="nt:unstructured">
+            <promocodedetails
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Promo Code Details"
+                sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+                <items jcr:primaryType="nt:unstructured">
+                    <columns
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <resortId
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/select"
+                                fieldDescription="Please select resort from the dropdown"
+                                fieldLabel="Resort Id"
+                                name="./resortId">
+                                <datasource
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="racv/components/utils/datasource/racvgenericlist"
+                                    path="/content/racv/lists/resort/resorts-list"/>
+                            </resortId>
+                            <promotionCode
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                fieldDescription="Please enter the promotion code"
+                                fieldLabel="Promotion Code"
+                                name="./promotionCode"
+                                required="false"/>
+                            <type
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/select"
+                                fieldDescription="Please select Type of Promo Code"
+                                fieldLabel="Type"
+                                name="./type">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <corporate
+                                        jcr:primaryType="nt:unstructured"
+                                        text="CORPORATE"
+                                        value="12"/>
+                                </items>
+                            </type>
+                            <memberType
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/select"
+                                fieldDescription="Please select Member Type"
+                                fieldLabel="Member Type"
+                                name="./memberType">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <member
+                                        jcr:primaryType="nt:unstructured"
+                                        text="MEMBER"
+                                        value="member"/>
+                                    <nonMember
+                                        jcr:primaryType="nt:unstructured"
+                                        text="NON MEMBER"
+                                        value="non-member"/>
+                                </items>
+                            </memberType>
+                            <memberRatePlanId
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                fieldDescription="Please enter member rate plan id for promo code"
+                                fieldLabel="Member Rate Plan Id"
+                                name="./memberRatePlanId"
+                                required="false"/>
+                            <nonMemberRatePlanId
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                fieldDescription="Please enter non-member rate plan id for promo code"
+                                fieldLabel="Non-Member Rate Plan Id"
+                                name="./nonMemberRatePlanId"
+                                required="false"/>
+                            <startDate
+                                jcr:mixinTypes="[cq:ReplicationStatus]"
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                fieldDescription="Please enter date mm/dd/yy"
+                                fieldLabel="Promotion Start Date In Format (mm/dd/yy)"
+                                name="./startDate"/>
+                            <endDate
+                                jcr:mixinTypes="[cq:ReplicationStatus]"
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                fieldDescription="Please enter date mm/dd/yy"
+                                fieldLabel="Promotion End Date In Format (mm/dd/yy)"
+                                name="./endDate"/>
+                        </items>
+                    </columns>
+                </items>
+            </promocodedetails>
+        </items>
+    </content>
+</jcr:root>
