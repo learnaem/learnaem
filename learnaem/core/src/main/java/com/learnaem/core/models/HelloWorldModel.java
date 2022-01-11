@@ -17,24 +17,29 @@ package com.learnaem.core.models;
 
 import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_TYPE;
 
+import java.util.Map;
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 
+import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
+import org.apache.sling.models.annotations.injectorspecific.RequestAttribute;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.apache.sling.settings.SlingSettingsService;
 
+import com.day.cq.dam.api.Asset;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 
-import java.util.Optional;
-
-@Model(adaptables = Resource.class)
+@Model(adaptables = SlingHttpServletRequest.class)
 public class HelloWorldModel {
 
     @ValueMapValue(name=PROPERTY_RESOURCE_TYPE, injectionStrategy=InjectionStrategy.OPTIONAL)
@@ -47,10 +52,16 @@ public class HelloWorldModel {
     private Resource currentResource;
     @SlingObject
     private ResourceResolver resourceResolver;
+    
+    @RequestAttribute
+    private String image;
 
+    
     private String message;
     
     private String[] techUsedinAEM;
+    
+    private String size;
 
     @PostConstruct
     protected void init() {
@@ -58,6 +69,22 @@ public class HelloWorldModel {
         String currentPagePath = Optional.ofNullable(pageManager)
                 .map(pm -> pm.getContainingPage(currentResource))
                 .map(Page::getPath).orElse("");
+   
+      String finalImagePath = image+"/jcr:content/metadata";
+      Resource r = resourceResolver.getResource(finalImagePath);
+      
+      ValueMap vr = r.adaptTo(ValueMap.class); // 1st way
+      MetadataValues m = r.adaptTo(MetadataValues.class); //2nd ways
+      size=m.getSize();
+      Resource imageres = resourceResolver.getResource(image);
+      /*Asset asset = imageres != null ? imageres.adaptTo(Asset.class) : null; //3rd way
+      Map<String, Object> assetMetadata = asset != null ? asset.getMetadata() : null;
+      */
+      Asset asset = imageres.adaptTo(Asset.class);
+      Map<String, Object> assetMetadata = asset.getMetadata();
+    
+      long assestSize =   (long) assetMetadata.get("dam:size");
+      long s = vr.get("dam:size", Long.class);
 
         message = "Hello World!\n"
             + "Resource type is: " + resourceType + "\n"
@@ -72,6 +99,10 @@ public class HelloWorldModel {
 
 	public String[] getTechUsedinAEM() {
 		return techUsedinAEM;
+	}
+
+	public String getSize() {
+		return size;
 	}
     
 
