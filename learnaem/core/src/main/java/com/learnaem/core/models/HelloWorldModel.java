@@ -27,6 +27,8 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Default;
+import org.apache.sling.models.annotations.DefaultInjectionStrategy;
+import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
@@ -38,8 +40,10 @@ import org.apache.sling.settings.SlingSettingsService;
 import com.day.cq.dam.api.Asset;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
+import com.learnaem.core.services.SampleService;
 
-@Model(adaptables = SlingHttpServletRequest.class)
+@Model(adaptables = SlingHttpServletRequest.class,resourceType="/apps/learnaem/components/helloworld",defaultInjectionStrategy=DefaultInjectionStrategy.OPTIONAL)
+@Exporter(name = "jackson", extensions = "json" )
 public class HelloWorldModel {
 
     @ValueMapValue(name=PROPERTY_RESOURCE_TYPE, injectionStrategy=InjectionStrategy.OPTIONAL)
@@ -56,6 +60,8 @@ public class HelloWorldModel {
     @RequestAttribute
     private String image;
 
+    @OSGiService
+    SampleService sampleService;
     
     private String message;
     
@@ -63,6 +69,7 @@ public class HelloWorldModel {
     
     private String size;
 
+    private String msgfromService;
     @PostConstruct
     protected void init() {
         PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
@@ -70,21 +77,24 @@ public class HelloWorldModel {
                 .map(pm -> pm.getContainingPage(currentResource))
                 .map(Page::getPath).orElse("");
    
-      String finalImagePath = image+"/jcr:content/metadata";
+     /* String finalImagePath = image+"/jcr:content/metadata";
       Resource r = resourceResolver.getResource(finalImagePath);
       
       ValueMap vr = r.adaptTo(ValueMap.class); // 1st way
       MetadataValues m = r.adaptTo(MetadataValues.class); //2nd ways
       size=m.getSize();
       Resource imageres = resourceResolver.getResource(image);
-      /*Asset asset = imageres != null ? imageres.adaptTo(Asset.class) : null; //3rd way
+      Asset asset = imageres != null ? imageres.adaptTo(Asset.class) : null; //3rd way
       Map<String, Object> assetMetadata = asset != null ? asset.getMetadata() : null;
-      */
+      
       Asset asset = imageres.adaptTo(Asset.class);
       Map<String, Object> assetMetadata = asset.getMetadata();
     
       long assestSize =   (long) assetMetadata.get("dam:size");
-      long s = vr.get("dam:size", Long.class);
+      long s = vr.get("dam:size", Long.class);*/
+        
+        
+        msgfromService = sampleService.getValues();
 
         message = "Hello World!\n"
             + "Resource type is: " + resourceType + "\n"
@@ -103,6 +113,10 @@ public class HelloWorldModel {
 
 	public String getSize() {
 		return size;
+	}
+
+	public String getMsgfromService() {
+		return msgfromService;
 	}
     
 
