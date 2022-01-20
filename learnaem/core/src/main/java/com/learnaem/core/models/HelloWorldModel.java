@@ -21,8 +21,17 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.jcr.ItemExistsException;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.version.VersionException;
 
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.resource.LoginException;
+import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
@@ -41,6 +50,7 @@ import com.day.cq.dam.api.Asset;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 import com.learnaem.core.services.SampleService;
+import com.learnaem.core.services.impl.SampleServiceImpl;
 
 @Model(adaptables = SlingHttpServletRequest.class,resourceType="/apps/learnaem/components/helloworld",defaultInjectionStrategy=DefaultInjectionStrategy.OPTIONAL)
 @Exporter(name = "jackson", extensions = "json" )
@@ -71,7 +81,7 @@ public class HelloWorldModel {
 
     private String msgfromService;
     @PostConstruct
-    protected void init() {
+    protected void init() throws ItemExistsException, PathNotFoundException, NoSuchNodeTypeException, LockException, VersionException, ConstraintViolationException, PersistenceException, LoginException, RepositoryException {
         PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
         String currentPagePath = Optional.ofNullable(pageManager)
                 .map(pm -> pm.getContainingPage(currentResource))
@@ -93,8 +103,9 @@ public class HelloWorldModel {
       long assestSize =   (long) assetMetadata.get("dam:size");
       long s = vr.get("dam:size", Long.class);*/
         
+   ///     SampleServiceImpl sampleService = new SampleServiceImpl(); 
         
-        msgfromService = sampleService.getValues();
+        sampleService.getValues();
 
         message = "Hello World!\n"
             + "Resource type is: " + resourceType + "\n"
