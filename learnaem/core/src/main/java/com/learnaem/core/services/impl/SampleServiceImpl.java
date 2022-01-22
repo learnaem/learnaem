@@ -16,11 +16,14 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.metatype.annotations.Designate;
 
+import com.learnaem.core.config.PaymentConfig;
 import com.learnaem.core.services.SampleService;
 import com.learnaem.core.utils.ServiceUtils;
 
 @Component(service=SampleService.class)
+@Designate(ocd=PaymentConfig.class)
 public class SampleServiceImpl implements SampleService{
 
 	@Reference
