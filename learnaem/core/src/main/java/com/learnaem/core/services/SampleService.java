@@ -13,7 +13,9 @@ import org.apache.sling.api.resource.PersistenceException;
 
 public interface SampleService {
 
-	public void getValues() throws LoginException, ItemExistsException, PathNotFoundException, NoSuchNodeTypeException,
-			LockException, VersionException, ConstraintViolationException, RepositoryException, PersistenceException;
+	/*public void getValues() throws LoginException, ItemExistsException, PathNotFoundException, NoSuchNodeTypeException,
+			LockException, VersionException, ConstraintViolationException, RepositoryException, PersistenceException;*/
+	
+	String getOsgiPayment();
 
 }

@@ -15,8 +15,13 @@
  */
 package com.learnaem.core.schedulers;
 
+import org.apache.sling.commons.scheduler.ScheduleOptions;
+import org.apache.sling.commons.scheduler.Scheduler;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Modified;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.metatype.annotations.AttributeDefinition;
 import org.osgi.service.metatype.annotations.Designate;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
@@ -24,42 +29,139 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A simple demo for cron-job like tasks that get executed regularly.
- * It also demonstrates how property values can be set. Users can
- * set the property values in /system/console/configMgr
+ * A simple demo for cron-job like tasks that get executed regularly. It also
+ * demonstrates how property values can be set. Users can set the property
+ * values in /system/console/configMgr
  */
-@Designate(ocd=SimpleScheduledTask.Config.class)
-@Component(service=Runnable.class)
+@Designate(ocd = SimpleScheduledTask.Config.class)
+@Component(service = Runnable.class)
 public class SimpleScheduledTask implements Runnable {
 
-    @ObjectClassDefinition(name="A scheduled task",
-                           description = "Simple demo for cron-job like task with properties")
-    public static @interface Config {
+	@Reference
+	Scheduler scheduler;
 
-        @AttributeDefinition(name = "Cron-job expression")
-        String scheduler_expression() default "*/30 * * * * ?";
+	@ObjectClassDefinition(name = "A scheduled task", description = "Simple demo for cron-job like task with properties")
+	public static @interface Config {
 
-        @AttributeDefinition(name = "Concurrent task",
-                             description = "Whether or not to schedule this task concurrently")
-        boolean scheduler_concurrent() default false;
+		@AttributeDefinition(name = "Cron-job expression")
+		String scheduler_expression() default "* */1 * * * ?";
 
-        @AttributeDefinition(name = "A parameter",
-                             description = "Can be configured in /system/console/configMgr")
-        String myParameter() default "";
-    }
+		@AttributeDefinition(name = "Concurrent task", description = "Whether or not to schedule this task concurrently")
+		boolean scheduler_concurrent() default false;
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+		@AttributeDefinition(name = "A parameter", description = "Can be configured in /system/console/configMgr")
+		String myParameter() default "";
+	}
 
-    private String myParameter;
-    
-    @Override
-    public void run() {
-        logger.debug("SimpleScheduledTask is now running, myParameter='{}'", myParameter);
-    }
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Activate
-    protected void activate(final Config config) {
-        myParameter = config.myParameter();
-    }
+	private String myParameter;
+
+	@Override
+	public void run() {
+		logger.info("SimpleScheduledTask is now running, myParameter='{}'", myParameter);
+	}
+
+	/**
+	 * Custom parameter that is to be read from the configuration
+	 */
+	private String customParameter;
+
+	/**
+	 * Id of the scheduler based on its name
+	 */
+	private int schedulerId;
+
+	/**
+	 * Activate method to initialize stuff
+	 * 
+	 * @param config
+	 */
+	@Activate
+	protected void activate(Config config) {
+
+		/**
+		 * Getting the scheduler id
+		 */
+		schedulerId = config.hashCode();
+
+		/**
+		 * Getting the custom parameter
+		 */
+		customParameter = config.myParameter();
+		addScheduler(config);
+	}
+
+	/**
+	 * Modifies the scheduler id on modification
+	 * 
+	 * @param config
+	 */
+	@Modified
+	protected void modified(Config config) {
+
+		/**
+		 * Removing the scheduler
+		 */
+		removeScheduler();
+
+		/**
+		 * Updating the scheduler id
+		 */
+		schedulerId = config.hashCode();
+
+		/**
+		 * Again adding the scheduler
+		 */
+		addScheduler(config);
+	}
+
+	/**
+	 * This method deactivates the scheduler and removes it
+	 * 
+	 * @param config
+	 */
+	@Deactivate
+	protected void deactivate(Config config) {
+
+		/**
+		 * Removing the scheduler
+		 */
+		removeScheduler();
+	}
+
+	/**
+	 * This method removes the scheduler
+	 */
+	private void removeScheduler() {
+		/**
+		 * Unscheduling/removing the scheduler
+		 */
+		scheduler.unschedule(String.valueOf(schedulerId));
+	}
+
+	/**
+	 * This method adds the scheduler
+	 * 
+	 * @param config
+	 */
+	private void addScheduler(Config config) {
+
+		/**
+		 * Scheduler option takes the cron expression as a parameter and run accordingly
+		 */
+		ScheduleOptions scheduleOptions = scheduler.EXPR(config.scheduler_expression());
+
+		/**
+		 * Adding some parameters
+		 */
+		scheduleOptions.canRunConcurrently(false);
+
+		/**
+		 * Scheduling the job
+		 */
+		scheduler.schedule(this, scheduleOptions);
+
+	}
 
 }

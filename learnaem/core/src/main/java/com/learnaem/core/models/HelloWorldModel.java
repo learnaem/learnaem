@@ -69,6 +69,8 @@ public class HelloWorldModel {
     
     @RequestAttribute
     private String image;
+    
+    private String payConfig;
 
     @OSGiService
     SampleService sampleService;
@@ -105,7 +107,9 @@ public class HelloWorldModel {
         
    ///     SampleServiceImpl sampleService = new SampleServiceImpl(); 
         
-        sampleService.getValues();
+    //    sampleService.getValues();
+        
+        payConfig = sampleService.getOsgiPayment();
 
         message = "Hello World!\n"
             + "Resource type is: " + resourceType + "\n"
@@ -129,6 +133,15 @@ public class HelloWorldModel {
 	public String getMsgfromService() {
 		return msgfromService;
 	}
+
+	public String getPayConfig() {
+		return payConfig;
+	}
+
+	public void setPayConfig(String payConfig) {
+		this.payConfig = payConfig;
+	}
+	
     
 
 }

@@ -27,13 +27,13 @@ public class SampleServlet extends SlingSafeMethodsServlet{
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
-		try {
+		/*try {
 			sampleService.getValues();
 		} catch (LoginException | RepositoryException e) {
 			e.printStackTrace();
-		}
+		}*/
         response.setContentType("application/json");
-        response.getWriter().write("Heloo Welcome to servlet");
+        response.getWriter().write(sampleService.getOsgiPayment());
+	}
 	}
 
-}
